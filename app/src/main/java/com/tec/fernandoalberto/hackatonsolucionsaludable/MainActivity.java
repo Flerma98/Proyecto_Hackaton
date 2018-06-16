@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
     private ActionBar toolbar;
     Fragment fragmentguardado;
     public static final int SegundosStock= 30000;
-    public XYPlot xyPlotPH;
     public static ArrayList<com.tec.fernandoalberto.hackatonsolucionsaludable.Datos> Datos= new ArrayList<>();
 
     @Override
@@ -80,13 +79,19 @@ public class MainActivity extends AppCompatActivity {
 
             public void onFinish() {
                 //Toast.makeText(MainActivity.this, "Acabó", Toast.LENGTH_SHORT).show();
-
                 ObtenerDatosDeJSon();
                 CuentaRegresiva(Segundos);
+                //comunicarElCambioAlFragment();
             }
         }.start();
 
     }
+
+    /*public void comunicarElCambioAlFragment() {
+        if(activity==ph) {
+
+        }
+    }*/
 
     public void CargarDatosAlArray(){
         Datos.clear();

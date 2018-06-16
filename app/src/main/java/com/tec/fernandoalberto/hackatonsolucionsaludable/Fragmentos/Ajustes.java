@@ -58,10 +58,11 @@ public class Ajustes extends Fragment {
     }
 
     public void Limpiar(){
-        BaseHelper baseHelper = new BaseHelper(getContext(), "DatosSN", null, 1);
+        BaseHelper baseHelper = new BaseHelper(getContext(), "DatosAgua", null, 1);
         SQLiteDatabase db = baseHelper.getWritableDatabase();
         db.execSQL("delete from Datos");
         Toast.makeText(getContext(), "Tabla limpiada", Toast.LENGTH_SHORT).show();
+        MainActivity.Datos.clear();
         startActivity(new Intent(getContext(), MainActivity.class));
     }
 

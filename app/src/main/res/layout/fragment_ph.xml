@@ -9,6 +9,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="50dp"
         android:fillViewport="true">
 
         <LinearLayout
@@ -28,12 +29,12 @@
                 android:textStyle="bold"
                 android:textColor="#ffffff"/>
 
-            <com.androidplot.xy.XYPlot
+            <com.github.mikephil.charting.charts.LineChart
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="30sp"
-                app:marginBottom="30sp"
-                android:id="@+id/GraficaPH"/>
+                android:layout_height="match_parent"
+                android:id="@+id/LineChartPH">
+
+            </com.github.mikephil.charting.charts.LineChart>
 
         </LinearLayout>
 
