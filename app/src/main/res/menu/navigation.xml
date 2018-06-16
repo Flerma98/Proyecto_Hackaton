@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/PH"
+        android:icon="@drawable/phicono"
+        android:title="PH" />
+
+    <item
+        android:id="@+id/Salinidad"
+        android:icon="@drawable/salicono"
+        android:title="Salinidad" />
+
+    <item
+        android:id="@+id/Conductividad"
+        android:icon="@drawable/conductividadicono"
+        android:title="Conductividad" />
+
+    <item
+        android:id="@+id/Ajustes"
+        android:icon="@drawable/ajustesicono"
+        android:title="Ajustes" />
+
+</menu>
