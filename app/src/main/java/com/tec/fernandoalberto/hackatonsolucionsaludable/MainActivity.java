@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActionBar toolbar;
     Fragment fragmentguardado;
-    public static final int SegundosStock= 30000;
+    public static int SegundosStock= 30000;
     public static ArrayList<com.tec.fernandoalberto.hackatonsolucionsaludable.Datos> Datos= new ArrayList<>();
 
     @Override
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
             Cursor c= db.rawQuery("select * from Datos", null);
             if(c.moveToFirst()){
                 do{
-                    Datos.add(new Datos(c.getInt(0), c.getInt(1), c.getInt(2), c.getString(3), c.getString(4)));
+                    Datos.add(new Datos(c.getFloat(0), c.getFloat(1), c.getFloat(2), c.getString(3), c.getString(4)));
                 }while (c.moveToNext());
             }
         }
@@ -153,7 +153,13 @@ public class MainActivity extends AppCompatActivity {
 
     public String Hora(){
         Calendar c = Calendar.getInstance();
-        String hora= String.valueOf(c.get(Calendar.HOUR)) + ":" + String.valueOf(c.get(Calendar.MINUTE) + ":" + String.valueOf(c.get(Calendar.SECOND)));
+        String hora="";
+        if(c.get(Calendar.HOUR)==0){
+            hora= String.valueOf(12) + ":" + String.valueOf(c.get(Calendar.MINUTE) + ":" + String.valueOf(c.get(Calendar.SECOND)));
+        }else{
+            hora= String.valueOf(c.get(Calendar.HOUR)) + ":" + String.valueOf(c.get(Calendar.MINUTE) + ":" + String.valueOf(c.get(Calendar.SECOND)));
+        }
+
         return hora;
     }
 
@@ -173,8 +179,8 @@ public class MainActivity extends AppCompatActivity {
                     JSONArray jArray = json.getJSONArray("Datos");
                     for(int i=0; i<jArray.length(); i++){
                         JSONObject json_data = jArray.getJSONObject(i);
-                        Datos.add(new Datos(Integer.parseInt(json_data.getString("PH")),Integer.parseInt(json_data.getString("CE")),Integer.parseInt(json_data.getString("Salinidad")),Fecha(),Hora()));
-                        GuardarDatos(Integer.parseInt(json_data.getString("PH")),Integer.parseInt(json_data.getString("CE")),Integer.parseInt(json_data.getString("Salinidad")),Fecha(),Hora());
+                        Datos.add(new Datos(Float.parseFloat(json_data.getString("PH")),Float.parseFloat(json_data.getString("CE")),Float.parseFloat(json_data.getString("Salinidad")),Fecha(),Hora()));
+                        GuardarDatos(Float.parseFloat(json_data.getString("PH")),Float.parseFloat(json_data.getString("CE")),Float.parseFloat(json_data.getString("Salinidad")),Fecha(),Hora());
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -197,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-    public void GuardarDatos(int ph, int ce, int sal, String fecha, String hora) {
+    public void GuardarDatos(float ph, float ce, float sal, String fecha, String hora) {
         BaseHelper baseHelper = new BaseHelper(this, "DatosAgua", null, 1);
         SQLiteDatabase db = baseHelper.getWritableDatabase();
         if (db != null) {

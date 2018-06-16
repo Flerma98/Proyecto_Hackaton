@@ -47,26 +47,25 @@ public class PH extends Fragment {
         try {
             txt.setText("PH Actual: " + MainActivity.Datos.get(MainActivity.Datos.size() - 1).getPH());
         }catch (Exception e){ }
-        LineChart lineChart = (LineChart) view.findViewById(R.id.LineChartPH);
-                // creating list of entry<br />
-                ArrayList<Entry> entries= new ArrayList<>();
-                entries.add(new Entry(0f,0f));
-                entries.add(new Entry(1f,10f));
-                entries.add(new Entry(2f,20f));
-                entries.add(new Entry(3f,30f));
-                entries.add(new Entry(4f,4f));
-                entries.add(new Entry(5f,5f));
-        LineDataSet dataset = new LineDataSet(entries, "");
-        ArrayList<String> labels = new ArrayList<>();
-                labels.add("cero");
-                labels.add("uno");
-                labels.add("dos");
-                labels.add("tres");
-                labels.add("cuatro");
-                labels.add("cinco");
-        LineData data = new LineData(dataset, dataset);
-                lineChart.setData(data);
-                lineChart.setDescription(new Description());
+        if(MainActivity.Datos.size()>0) {
+            LineChart lineChart = (LineChart) view.findViewById(R.id.LineChartPH);
+
+            // creating list of entry<br />
+            ArrayList<Entry> entries = new ArrayList<>();
+            for (int i = 0, a = 0; i < MainActivity.Datos.size(); i++, a++) {
+                entries.add(new Entry(i, MainActivity.Datos.get(a).getPH()));
+            }
+            LineDataSet dataset = new LineDataSet(entries, "PH");
+            ArrayList<String> labels = new ArrayList<>();
+            for (int i = 0; i < MainActivity.Datos.size(); i++) {
+                labels.add(MainActivity.Datos.get(i).getFecha() + " - " + MainActivity.Datos.get(i).getHora());
+            }
+
+            LineData data = new LineData(dataset, dataset);
+            lineChart.setData(data);
+            lineChart.setDescription(new Description());
+            lineChart.setBackgroundColor(Color.WHITE);
+        }
         return view;
     }
 

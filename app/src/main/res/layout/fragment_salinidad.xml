@@ -28,11 +28,12 @@
                 android:textStyle="bold"
                 android:textColor="#ffffff"/>
 
-            <com.androidplot.xy.XYPlot
-                android:layout_margin="30sp"
+            <com.github.mikephil.charting.charts.LineChart
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/GraficaSal"/>
+                android:layout_height="match_parent"
+                android:id="@+id/LineChartSal">
+
+            </com.github.mikephil.charting.charts.LineChart>
 
         </LinearLayout>
 

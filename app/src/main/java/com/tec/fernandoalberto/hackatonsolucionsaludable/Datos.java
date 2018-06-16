@@ -1,45 +1,45 @@
 package com.tec.fernandoalberto.hackatonsolucionsaludable;
 
 public class Datos {
-    private int PH;
-    private int CE;
-    private int Sal;
+    private float PH;
+    private float CE;
+    private float Sal;
     private String Fecha;
     private String Hora;
 
     public Datos() {
     }
 
-    public Datos(int PH, int CE, int Sal, String fecha, String hora) {
+    public Datos(float PH, float CE, float sal, String fecha, String hora) {
         this.PH = PH;
         this.CE = CE;
-        this.Sal = Sal;
+        Sal = sal;
         Fecha = fecha;
         Hora = hora;
     }
 
-    public int getPH() {
+    public float getPH() {
         return PH;
     }
 
-    public void setPH(int PH) {
+    public void setPH(float PH) {
         this.PH = PH;
     }
 
-    public int getSal() {
-        return Sal;
-    }
-
-    public void setSal(int sal) {
-        Sal = sal;
-    }
-
-    public int getCE() {
+    public float getCE() {
         return CE;
     }
 
-    public void setCE(int CE) {
+    public void setCE(float CE) {
         this.CE = CE;
+    }
+
+    public float getSal() {
+        return Sal;
+    }
+
+    public void setSal(float sal) {
+        Sal = sal;
     }
 
     public String getFecha() {
