@@ -69,32 +69,6 @@ public class PH extends Fragment {
         return view;
     }
 
-    /*public static void TablaPH(){
-        List<Integer> list= new ArrayList();
-        if(MainActivity.Datos.size()>0) {
-            if (MainActivity.Datos.size()>10) {
-                for (int i = MainActivity.Datos.size() - 10 ; i < MainActivity.Datos.size(); i++) {
-                    list.add(MainActivity.Datos.get(i).getPH());
-                }
-            } else {
-                for (int i = 0; i < MainActivity.Datos.size(); i++) {
-                    list.add(MainActivity.Datos.get(i).getPH());
-                }
-            }
-        }
-        XYSeries seriesPH= new SimpleXYSeries(
-                list,
-                SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, //Solo variables Verticales
-                "PH" //Nombre de la primera serie
-        );
-        LineAndPointFormatter series1Format= new LineAndPointFormatter(
-                Color.rgb(0,200,0), //Color de la linea
-                Color.rgb(0,100,0), //Ccolor del punto
-                Color.rgb(150,190,150), null // Relleno
-        );
-        xyPlotPH.addSeries(seriesPH,series1Format);
-    }*/
-
 
 
 }

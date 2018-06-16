@@ -53,7 +53,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ActionBar toolbar;
     Fragment fragmentguardado;
-    public static int SegundosStock= 30000;
+    public int fragmentindice;
+    public static int SegundosStock= 10000;
     public static ArrayList<com.tec.fernandoalberto.hackatonsolucionsaludable.Datos> Datos= new ArrayList<>();
 
     @Override
@@ -81,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 //Toast.makeText(MainActivity.this, "Acabó", Toast.LENGTH_SHORT).show();
                 ObtenerDatosDeJSon();
                 CuentaRegresiva(Segundos);
+                CargarFrom(fragmentindice);
                 //comunicarElCambioAlFragment();
             }
         }.start();
@@ -107,41 +109,45 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Fragment fragment;
-            switch (item.getItemId()) {
-                case R.id.PH:
-                    toolbar.setTitle("PH");
-                    fragment = new PH();
-                    fragmentguardado= new PH();
-                    loadFragment(fragment);
-                    return true;
-                case R.id.Conductividad:
-                    toolbar.setTitle("Conductividad");
-                    fragment = new Conductividad();
-                    fragmentguardado= new Conductividad();
-                    loadFragment(fragment);
-                    return true;
-                case R.id.Salinidad:
-                    toolbar.setTitle("Salinidad");
-                    fragment = new Salinidad();
-                    fragmentguardado= new Salinidad();
-                    loadFragment(fragment);
-                    return true;
-                case R.id.Ajustes:
-                    toolbar.setTitle("Ajustes");
-                    fragment = new Ajustes();
-                    fragmentguardado= new Ajustes();
-                    loadFragment(fragment);
-                    return true;
-            }
-            return false;
+            fragmentindice = item.getItemId();
+            CargarFrom(fragmentindice);
+            return true;
         }
     };
+
+
+    public void CargarFrom(int indice){
+        Fragment fragment;
+        switch (indice) {
+            case R.id.PH:
+                toolbar.setTitle("PH");
+                Log.e("Mi Log", "CargarFrom: PH");
+                fragment = new PH();
+                loadFragment(fragment);
+                break;
+            case R.id.Conductividad:
+                Log.e("Mi Log", "CargarFrom: CE");
+                toolbar.setTitle("Conductividad");
+                fragment = new Conductividad();
+                loadFragment(fragment);
+                break;
+            case R.id.Salinidad:
+                Log.e("Mi Log", "CargarFrom: Sal");
+                toolbar.setTitle("Salinidad");
+                fragment = new Salinidad();
+                loadFragment(fragment);
+                break;
+            case R.id.Ajustes:
+                Log.e("Mi Log", "CargarFrom: Ajustes");
+                toolbar.setTitle("Ajustes");
+                fragment = new Ajustes();
+                loadFragment(fragment);
+                break;
+        }
+    }
 
 
     public String Fecha(){
