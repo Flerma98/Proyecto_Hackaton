@@ -243,6 +243,38 @@ public class MainActivity extends AppCompatActivity {
                         JSONObject json_data = jArray.getJSONObject(i);
                         Datos.add(new Datos(Float.parseFloat(json_data.getString("PH")),Float.parseFloat(json_data.getString("CE")),Float.parseFloat(json_data.getString("Salinidad")),Fecha(),Hora()));
                         GuardarDatos(Float.parseFloat(json_data.getString("PH")),Float.parseFloat(json_data.getString("CE")),Float.parseFloat(json_data.getString("Salinidad")),Fecha(),Hora());
+                        if(Float.parseFloat(json_data.getString("PH"))>6.5 || Float.parseFloat(json_data.getString("PH"))<5.5){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                            builder.setMessage("ALERTA PH FUERA DE LOS RANGOS")
+                                    .setCancelable(false)
+                                    .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                        }
+                                    })
+                                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    });
+                            AlertDialog alert = builder.create();
+                            alert.show();
+                        }
+                        if(Float.parseFloat(json_data.getString("CE"))>1.5 || Float.parseFloat(json_data.getString("PH"))<0){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                            builder.setMessage("ALERTA CONDUCTIVIDAD ELECTRICA FUERA DE LOS RANGOS")
+                                    .setCancelable(false)
+                                    .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                        }
+                                    })
+                                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    });
+                            AlertDialog alert = builder.create();
+                            alert.show();
+                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -276,7 +308,7 @@ public class MainActivity extends AppCompatActivity {
             registronuevo.put("Hora", hora);
             long i = db.insert("Datos", null, registronuevo);
             if (i > 0) {
-                Toast.makeText(this, "Registro Nuevo Insertado", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Registro Nuevo Insertado", Toast.LENGTH_SHORT).show();
             }
         }
     }

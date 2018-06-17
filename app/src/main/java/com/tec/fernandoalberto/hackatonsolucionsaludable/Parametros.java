@@ -61,27 +61,27 @@ public class Parametros extends AppCompatActivity {
         call.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
-                Toast.makeText(Parametros.this, "Envio exitoso MAX", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Parametros.this, "Envio exitoso MAX", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call call, Throwable t) {
-                Toast.makeText(Parametros.this, "Error al enviar dato\n \n" +  t.getMessage(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(Parametros.this, "Error al enviar dato\n \n" +  t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
         Call call1 = endPoint.guardarPHMin(phmin);
         call1.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
-                Toast.makeText(Parametros.this, "Envio exitoso MIN", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(Parametros.this, "Envio exitoso MIN", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call call, Throwable t) {
-                Toast.makeText(Parametros.this, "Error al enviar dato\n \n" +  t.getMessage(), Toast.LENGTH_LONG).show();
+               // Toast.makeText(Parametros.this, "Error al enviar dato\n \n" +  t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-
+        Toast.makeText(Parametros.this, "Envio exitoso", Toast.LENGTH_SHORT).show();
     }
 
     public void SubirDatosDeJSonCE(String cemax, String cemin){
@@ -112,6 +112,6 @@ public class Parametros extends AppCompatActivity {
                 // Toast.makeText(MainActivity.this, "Error al enviar dato\n \n" +  t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-
+        Toast.makeText(Parametros.this, "Envio exitoso MAX", Toast.LENGTH_SHORT).show();
     }
 }
