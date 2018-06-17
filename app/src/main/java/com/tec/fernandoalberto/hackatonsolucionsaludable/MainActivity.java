@@ -1,6 +1,7 @@
 package com.tec.fernandoalberto.hackatonsolucionsaludable;
 
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,8 +12,10 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -55,20 +58,70 @@ public class MainActivity extends AppCompatActivity {
     Fragment fragmentguardado;
     public int fragmentindice;
     public static int SegundosStock= 10000;
+    public EndPoint endPoint;
+
     public static ArrayList<com.tec.fernandoalberto.hackatonsolucionsaludable.Datos> Datos= new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        CargarDatosAlArray();
-        ObtenerDatosDeJSon();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = getSupportActionBar();
+
+        CargarDatosAlArray();
+        ObtenerDatosDeJSon();
+        Log.e("AQUI", "Entre aca");
+
+//        final Retrofit.Builder builder= new Retrofit.Builder().baseUrl(Constantes_web_service.BASE_URL).addConverterFactory(GsonConverterFactory.create());
+//        Retrofit retrofit= builder.build();
+//        endPoint = retrofit.create(EndPoint.class);
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         toolbar.setTitle("PH");
         loadFragment(new PH());
         CuentaRegresiva(SegundosStock);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        switch (id){
+            case R.id.action_Ajustes:
+                Toast.makeText(this, "Ajustes", Toast.LENGTH_SHORT).show();
+                fragmentindice=9;
+                startActivity(new Intent(MainActivity.this, Parametros.class));
+                break;
+        }
+                /*AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setMessage("¿Quiere eliminar todos los equipos?")
+                        .setCancelable(false)
+                        .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Limpiar();
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }else{
+                Toast.makeText(this, "No hay equipos que eliminar", Toast.LENGTH_SHORT).show();
+            }*/
+        return super.onOptionsItemSelected(item);
     }
 
     public void CuentaRegresiva(final int Segundos) {
@@ -146,6 +199,8 @@ public class MainActivity extends AppCompatActivity {
                 fragment = new Ajustes();
                 loadFragment(fragment);
                 break;
+            case 9:
+                break;
         }
     }
 
@@ -170,9 +225,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void ObtenerDatosDeJSon(){
+
         final Retrofit.Builder builder= new Retrofit.Builder().baseUrl(Constantes_web_service.BASE_URL).addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit= builder.build();
-        EndPoint endPoint= retrofit.create(EndPoint.class);
+        endPoint = retrofit.create(EndPoint.class);
         Call call= endPoint.ObtenerReportes();
 
         call.enqueue(new Callback() {
@@ -195,6 +251,44 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call call, Throwable t) {
                 //Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
+    public void SubirDatosDeJSonPH(String ph){
+        final Retrofit.Builder builder= new Retrofit.Builder().baseUrl(Constantes_web_service.BASE_URL).addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit= builder.build();
+        endPoint = retrofit.create(EndPoint.class);
+        Call call = endPoint.guardarPH(ph);
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+               // Toast.makeText(MainActivity.this, "Envio exitoso", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+               // Toast.makeText(MainActivity.this, "Error al enviar dato\n \n" +  t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
+    public void SubirDatosDeJSonCE(String ce){
+        final Retrofit.Builder builder= new Retrofit.Builder().baseUrl(Constantes_web_service.BASE_URL).addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit= builder.build();
+        endPoint = retrofit.create(EndPoint.class);
+        Call call = endPoint.guardarCE(ce);
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                // Toast.makeText(MainActivity.this, "Envio exitoso", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                // Toast.makeText(MainActivity.this, "Error al enviar dato\n \n" +  t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
 

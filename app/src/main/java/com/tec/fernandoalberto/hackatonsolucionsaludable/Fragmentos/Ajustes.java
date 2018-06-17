@@ -42,7 +42,9 @@ public class Ajustes extends Fragment {
         btnLimpiar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Limpiar();
+                if(MainActivity.Datos.size()>0) {
+                    Limpiar();
+                }
             }
         });
         return view;
