@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
         switch (id){
             case R.id.action_Ajustes:
-                Toast.makeText(this, "Ajustes", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Ajustes", Toast.LENGTH_SHORT).show();
                 fragmentindice=9;
                 startActivity(new Intent(MainActivity.this, Parametros.class));
                 break;
@@ -255,45 +255,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
-    public void SubirDatosDeJSonPH(String ph){
-        final Retrofit.Builder builder= new Retrofit.Builder().baseUrl(Constantes_web_service.BASE_URL).addConverterFactory(GsonConverterFactory.create());
-        Retrofit retrofit= builder.build();
-        endPoint = retrofit.create(EndPoint.class);
-        Call call = endPoint.guardarPH(ph);
-        call.enqueue(new Callback() {
-            @Override
-            public void onResponse(Call call, Response response) {
-               // Toast.makeText(MainActivity.this, "Envio exitoso", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure(Call call, Throwable t) {
-               // Toast.makeText(MainActivity.this, "Error al enviar dato\n \n" +  t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-
-    }
-
-    public void SubirDatosDeJSonCE(String ce){
-        final Retrofit.Builder builder= new Retrofit.Builder().baseUrl(Constantes_web_service.BASE_URL).addConverterFactory(GsonConverterFactory.create());
-        Retrofit retrofit= builder.build();
-        endPoint = retrofit.create(EndPoint.class);
-        Call call = endPoint.guardarCE(ce);
-        call.enqueue(new Callback() {
-            @Override
-            public void onResponse(Call call, Response response) {
-                // Toast.makeText(MainActivity.this, "Envio exitoso", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure(Call call, Throwable t) {
-                // Toast.makeText(MainActivity.this, "Error al enviar dato\n \n" +  t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-
-    }
-
 
     public void loadFragment(Fragment fragment) {
         // load fragment

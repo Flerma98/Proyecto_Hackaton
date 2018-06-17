@@ -8,9 +8,15 @@ public interface EndPoint {
     @GET(Constantes_web_service.GET_REPORTE)
     Call<Object> ObtenerReportes();
 
-    @GET(Constantes_web_service.SAVE_PH)
-    Call<Object> guardarPH(@Query("Data") String data);
+    @GET(Constantes_web_service.SAVE_PUTDATA)
+    Call<Object> guardarPHMax(@Query("PHMax") String data);
 
-    @GET(Constantes_web_service.SAVE_CE)
-    Call<Object> guardarCE(@Query("Data") String data);
+    @GET(Constantes_web_service.SAVE_PUTDATA)
+    Call<Object> guardarPHMin(@Query("PHMin") String data);
+
+    @GET(Constantes_web_service.SAVE_PUTDATA)
+    Call<Object> guardarCEMax(@Query("CEMax") String data);
+
+    @GET(Constantes_web_service.SAVE_PUTDATA)
+    Call<Object> guardarCEMin(@Query("CEMin") String data);
 }
