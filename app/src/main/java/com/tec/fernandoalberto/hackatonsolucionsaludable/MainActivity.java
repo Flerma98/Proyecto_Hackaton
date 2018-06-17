@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         toolbar.setTitle("PH");
         loadFragment(new PH());
-       // CuentaRegresiva(SegundosStock);
+        CuentaRegresiva(SegundosStock);
     }
 
     @Override
