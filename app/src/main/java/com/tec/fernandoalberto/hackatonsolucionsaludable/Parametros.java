@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tec.fernandoalberto.hackatonsolucionsaludable.Control_de_datos.Constantes_web_service;
 import com.tec.fernandoalberto.hackatonsolucionsaludable.Control_de_datos.EndPoint;
@@ -35,7 +36,8 @@ public class Parametros extends AppCompatActivity {
         btnEnviarPH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(txtPHMax.getText().toString().length()==0||txtPHMin.getText().toString().length()==0){
+                if(txtPHMax.getText().toString().length()==0||txtPHMin.getText().toString().length()==0) {
+                }else{
                     SubirDatosDeJSonPH(txtPHMax.getText().toString(), txtPHMin.getText().toString());
                 }
             }
@@ -43,7 +45,8 @@ public class Parametros extends AppCompatActivity {
         btnEenviarCE.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(txtCEMax.getText().toString().length()==0||txtCEMin.getText().toString().length()==0){
+                if(txtCEMax.getText().toString().length()==0||txtCEMin.getText().toString().length()==0) {
+                }else{
                     SubirDatosDeJSonPH(txtCEMax.getText().toString(), txtCEMin.getText().toString());
                 }
             }
@@ -58,24 +61,24 @@ public class Parametros extends AppCompatActivity {
         call.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
-                // Toast.makeText(MainActivity.this, "Envio exitoso", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Parametros.this, "Envio exitoso MAX", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call call, Throwable t) {
-                // Toast.makeText(MainActivity.this, "Error al enviar dato\n \n" +  t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(Parametros.this, "Error al enviar dato\n \n" +  t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
         Call call1 = endPoint.guardarPHMin(phmin);
         call1.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
-                // Toast.makeText(MainActivity.this, "Envio exitoso", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Parametros.this, "Envio exitoso MIN", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call call, Throwable t) {
-                // Toast.makeText(MainActivity.this, "Error al enviar dato\n \n" +  t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(Parametros.this, "Error al enviar dato\n \n" +  t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
 
